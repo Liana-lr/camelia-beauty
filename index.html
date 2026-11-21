@@ -157,11 +157,45 @@
         <p>&copy; 2026 Camélia Beauty. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- ASSISTENTE VIRTUAL -->
-    <button id="botao-cecilia" class="botao-cecilia" type="button">
-        Converse com a Cecília
-    </button>
+    <!-- ASSISTENTE VIRTUAL CECÍLIA -->
+<button id="botao-cecilia" class="botao-cecilia" type="button">
+    Converse com a Cecília
+</button>
 
-    <script src="script.js"></script>
+<div id="janela-cecilia" class="janela-cecilia">
+
+    <div class="cabecalho-cecilia">
+        <div>
+            <h3>Cecília</h3>
+            <span>Sua assistente Camélia Beauty</span>
+        </div>
+
+        <button id="fechar-cecilia" type="button">
+            &times;
+        </button>
+    </div>
+
+    <div id="mensagens-cecilia" class="mensagens-cecilia">
+        <div class="mensagem-cecilia mensagem-assistente">
+            Olá! Seja muito bem-vinda à Camélia Beauty!
+            Sou a Cecília. Como posso ajudar você hoje?
+        </div>
+    </div>
+
+    <form id="form-cecilia" class="form-cecilia">
+        <input
+            type="text"
+            id="entrada-cecilia"
+            placeholder="Digite sua mensagem..."
+            autocomplete="off"
+            required
+        >
+
+        <button type="submit">Enviar</button>
+    </form>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

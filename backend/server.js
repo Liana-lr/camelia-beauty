@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -348,6 +349,146 @@ app.post("/api/pedidos", async (req, res) => {
 
     } finally {
         conexao.release();
+    }
+});
+
+
+// Assistente virtual Cecília — integração com Gemini
+app.post("/api/cecilia", async (req, res) => {
+    try {
+        const { mensagem } = req.body;
+
+        if (typeof mensagem !== "string" || !mensagem.trim()) {
+            return res.status(400).json({
+                erro: "Digite uma mensagem para a Cecília."
+            });
+        }
+
+        if (!process.env.GEMINI_API_KEY) {
+            return res.status(500).json({
+                erro: "A chave da API não está configurada."
+            });
+        }
+
+        // Busca os produtos disponíveis no banco de dados
+        const resultado = await pool.query(`
+            SELECT
+                p.nome,
+                p.descricao,
+                p.preco,
+                c.nome AS categoria
+            FROM produtos p
+            JOIN categorias c ON c.id = p.categoria_id
+            WHERE p.ativo = TRUE
+            ORDER BY p.id;
+        `);
+
+        const catalogo = resultado.rows.map(produto =>
+            `- ${produto.nome} | Categoria: ${produto.categoria} | Descrição: ${produto.descricao} | Preço: R$ ${Number(produto.preco).toFixed(2)}`
+        ).join("\n");
+
+        const respostaGemini = await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": process.env.GEMINI_API_KEY
+                },
+                body: JSON.stringify({
+                    systemInstruction: {
+                        parts: [{
+                            text: `
+Você é Cecília, a assistente virtual oficial da Camélia Beauty.
+
+IDENTIDADE E PERSONALIDADE:
+Você representa exclusivamente a loja Camélia Beauty.
+Sua personalidade é elegante, acolhedora, educada, gentil e atenciosa.
+Responda sempre em português brasileiro, com clareza e cordialidade.
+
+OBJETIVO:
+Seu trabalho é atender clientes e visitantes da Camélia Beauty, ajudando com:
+- Informações sobre a loja.
+- Categorias e produtos disponíveis.
+- Características e descrições dos produtos.
+- Preços e dúvidas sobre o catálogo.
+- Beleza, maquiagem e cuidados com a pele, cabelos e corpo, desde que relacionados aos produtos da loja.
+- Dúvidas sobre compras, pedidos e funcionamento do site.
+
+RESTRIÇÃO DE ASSUNTOS:
+Você só pode responder perguntas relacionadas à Camélia Beauty, à sua loja, ao seu catálogo, aos seus produtos e ao atendimento ao cliente.
+
+Se alguém perguntar sobre assuntos sem relação com a loja, como previsão do tempo, notícias, política, esportes, programação, cálculos ou assuntos pessoais, não responda à pergunta.
+
+Nesses casos, responda educadamente:
+"Desculpe, mas sou a Cecília, assistente virtual da Camélia Beauty, e posso ajudar apenas com assuntos relacionados à nossa loja e aos nossos produtos. 🌷"
+
+REGRAS SOBRE OS PRODUTOS:
+Utilize exclusivamente o catálogo fornecido abaixo.
+Não invente produtos, preços, descontos, características, disponibilidade ou informações comerciais.
+Se uma informação não estiver disponível no catálogo, informe educadamente que não possui essa informação.
+
+APRESENTAÇÃO DE PREÇOS:
+Sempre apresente os preços utilizando o formato monetário brasileiro, como R$ 69,90.
+Nunca escreva valores monetários por extenso.
+Utilize vírgula para separar os centavos e duas casas decimais.
+Sempre confira o preço no catálogo fornecido antes de responder.
+
+FORMATAÇÃO E QUALIDADE DA ESCRITA:
+Não utilize Markdown, asteriscos ou símbolos de formatação.
+Escreva em português brasileiro correto, com pontuação, vírgulas e acentuação adequadas.
+Organize as respostas em frases naturais e parágrafos bem construídos.
+Evite apresentar palavras ou categorias soltas, sem pontuação.
+Quando mencionar várias categorias em uma frase, separe-as com vírgulas e utilize "e" antes da última categoria.
+Exemplo: "Temos produtos de maquiagem, cuidados com a pele, corpo e cabelos."
+Mantenha um tom elegante, acolhedor e profissional, sem exagerar nos cumprimentos.
+
+CATÁLOGO ATUAL DA CAMÉLIA BEAUTY:
+${catalogo}
+`
+                        }]
+                    },
+                    contents: [{
+                        role: "user",
+                        parts: [{ text: mensagem.trim() }]
+                    }],
+                    generationConfig: {
+                        thinkingConfig: {
+                            thinkingLevel: "LOW"
+                        },
+                        maxOutputTokens: 700
+                    }
+                })
+            }
+        );
+
+        const dados = await respostaGemini.json();
+
+        if (!respostaGemini.ok) {
+            console.error("Erro da API Gemini:", dados.error?.message);
+            return res.status(502).json({
+                erro: "Não foi possível obter uma resposta da Cecília."
+            });
+        }
+
+        const resposta = dados.candidates?.[0]?.content?.parts
+            ?.map(parte => parte.text || "")
+            .join("")
+            .trim();
+
+        if (!resposta) {
+            return res.status(502).json({
+                erro: "A Cecília não conseguiu gerar uma resposta."
+            });
+        }
+
+        res.json({ resposta });
+
+    } catch (erro) {
+        console.error("Erro na Cecília:", erro.message);
+        res.status(500).json({
+            erro: "Ocorreu um erro ao conversar com a Cecília."
+        });
     }
 });
 

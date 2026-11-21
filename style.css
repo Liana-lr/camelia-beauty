@@ -500,3 +500,125 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+/* JANELA DE CONVERSA DA CECÍLIA */
+
+.janela-cecilia {
+    position: fixed;
+    right: 25px;
+    bottom: 90px;
+    width: 340px;
+    max-width: calc(100vw - 30px);
+    height: 430px;
+    max-height: calc(100vh - 110px);
+    box-sizing: border-box;
+    background-color: var(--branco);
+    border: 1px solid var(--bege);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px #0002;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.janela-cecilia.aberta {
+    display: flex;
+}
+
+.cabecalho-cecilia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: var(--dourado-escuro);
+    color: white;
+}
+
+.cabecalho-cecilia h3 {
+    margin: 0;
+}
+
+.cabecalho-cecilia span {
+    font-size: 12px;
+}
+
+.cabecalho-cecilia button {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* ESTILO DAS MENSAGENS DA CECÍLIA */
+.mensagens-cecilia {
+    flex: 1;
+    min-height: 0;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mensagem-cecilia {
+    max-width: 82%;
+    width: fit-content;
+    padding: 9px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+}
+
+.mensagem-usuario {
+    align-self: flex-end;
+    margin-left: auto;
+    background-color: var(--dourado-escuro);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.mensagem-assistente {
+    align-self: flex-start;
+    margin-right: auto;
+    background-color: var(--bege);
+    color: #514536;
+    border-bottom-left-radius: 4px;
+}
+
+.form-cecilia {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--bege);
+}
+
+.form-cecilia input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--bege);
+    border-radius: 20px;
+    outline: none;
+}
+
+.form-cecilia button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--dourado-escuro);
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .janela-cecilia {
+        right: 12px;
+        bottom: 80px;
+        width: calc(100vw - 24px);
+        height: 450px;
+    }
+}

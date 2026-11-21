@@ -205,3 +205,112 @@ document.addEventListener("keydown", (evento) => {
         fecharPainelCarrinho();
     }
 });
+
+// Controle de abertura e fechamento da Cecília
+const botaoCecilia = document.getElementById("botao-cecilia");
+const janelaCecilia = document.getElementById("janela-cecilia");
+const fecharCecilia = document.getElementById("fechar-cecilia");
+
+// Abre a conversa ao clicar no botão
+botaoCecilia.addEventListener("click", () => {
+    janelaCecilia.classList.add("aberta");
+});
+
+// Fecha a conversa ao clicar no X
+fecharCecilia.addEventListener("click", () => {
+    janelaCecilia.classList.remove("aberta");
+});
+
+console.log("Cecília: JavaScript carregado!");
+
+
+// Recebe e responde às mensagens enviadas para Cecília
+const formularioCecilia = document.getElementById("form-cecilia");
+const entradaCecilia = document.getElementById("entrada-cecilia");
+const mensagensCecilia = document.getElementById("mensagens-cecilia");
+
+// Adiciona uma mensagem à conversa
+
+
+function adicionarMensagemCecilia(texto, remetente) {
+    const mensagem = document.createElement("div");
+
+    mensagem.className = `mensagem-cecilia mensagem-${remetente}`;
+
+    if (remetente === "assistente") {
+        const textoSeguro = texto
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+        const textoFormatado = textoSeguro
+            .replace(/\s*\*\s+(?=\*\*)/g, "<br>• ")
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\n/g, "<br>");
+
+        mensagem.innerHTML = textoFormatado;
+    } else {
+        mensagem.textContent = texto;
+    }
+
+    mensagensCecilia.appendChild(mensagem);
+    mensagensCecilia.scrollTop = mensagensCecilia.scrollHeight;
+}
+
+
+// Define a resposta automática da Cecília
+
+async function responderCecilia(texto) {
+    try {
+        const respostaAPI = await fetch("http://localhost:3000/api/cecilia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                mensagem: texto
+            })
+        });
+
+        const dados = await respostaAPI.json();
+
+        if (!respostaAPI.ok) {
+            throw new Error(dados.erro || "Erro ao conversar com a Cecília.");
+        }
+
+        return dados.resposta;
+
+    } catch (erro) {
+        console.error("Erro na comunicação com a Cecília:", erro);
+
+        return "Desculpe, não consegui responder neste momento. Por favor, tente novamente.";
+    }
+}
+
+
+// Processa o envio da mensagem
+
+formularioCecilia.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+
+    const texto = entradaCecilia.value.trim();
+
+    if (!texto) return;
+
+    adicionarMensagemCecilia(texto, "usuario");
+
+    entradaCecilia.value = "";
+    entradaCecilia.disabled = true;
+
+    adicionarMensagemCecilia("Cecília está digitando...", "assistente");
+
+    const resposta = await responderCecilia(texto);
+
+    const mensagens = mensagensCecilia.querySelectorAll(".mensagem-assistente");
+    const ultimaMensagem = mensagens[mensagens.length - 1];
+
+    ultimaMensagem.textContent = resposta;
+
+    entradaCecilia.disabled = false;
+    entradaCecilia.focus();
+});
