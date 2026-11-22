@@ -42,6 +42,7 @@ Pessoas interessadas em produtos de beleza, maquiagem e cuidados pessoais.
 - CORS: comunicação entre front-end e back-end.
 - dotenv: gerenciamento das variáveis de ambiente.
 - pg: conexão com o banco de dados PostgreSQL.
+- Google Gemini API: integração de inteligência artificial para o atendimento virtual.
 
 ### Banco de dados
 - PostgreSQL: armazenamento persistente das informações.
@@ -63,6 +64,9 @@ Pessoas interessadas em produtos de beleza, maquiagem e cuidados pessoais.
 - Atualização e exclusão lógica de produtos.
 - Registro demonstrativo de pedidos.
 - Persistência de dados no PostgreSQL.
+- Assistente virtual Cecília integrada à API Google Gemini.
+- Atendimento automatizado com personalidade e regras próprias.
+- Consulta ao catálogo de produtos diretamente no PostgreSQL pela assistente virtual.
 
 ## Estrutura do projeto
 
@@ -132,6 +136,7 @@ O back-end utiliza Node.js e Express para disponibilizar as seguintes rotas:
 | DELETE | `/api/produtos/:id` | Realiza a exclusão lógica de um produto. |
 | POST | `/api/contato` | Registra uma mensagem de contato. |
 | POST | `/api/pedidos` | Registra um pedido demonstrativo. |
+| POST | `/api/cecilia` | Envia mensagens à assistente Cecília e recebe respostas geradas pela API Google Gemini com base no catálogo ativo. |
 
 As operações de banco de dados utilizam consultas parametrizadas para evitar a inserção direta de valores nas instruções SQL.
 
@@ -142,6 +147,7 @@ As operações de banco de dados utilizam consultas parametrizadas para evitar a
 - Node.js instalado.
 - npm instalado.
 - Banco de dados PostgreSQL configurado.
+- Chave de API do Google Gemini, obtida no Google AI Studio.
 
 ### 2. Clonar o repositório
 
@@ -163,7 +169,11 @@ Crie um arquivo chamado `.env` dentro da pasta `backend/`, utilizando o arquivo 
 
 Configure a variável `DATABASE_URL` com a URL de conexão do seu banco PostgreSQL.
 
-Não compartilhe nem publique o arquivo `.env`, pois ele contém informações privadas de conexão.
+Configure a variável `GEMINI_API_KEY` com uma chave de API obtida no Google AI Studio.
+
+A variável `PORT` define a porta utilizada pelo servidor, configurada inicialmente como 3000.
+
+**Importante:** não compartilhe nem publique o arquivo `.env` no GitHub, pois ele contém informações privadas de conexão e acesso à API.
 
 ### 5. Executar o servidor
 
