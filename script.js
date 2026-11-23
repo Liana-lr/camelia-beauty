@@ -108,7 +108,7 @@ async function carregarProdutos() {
     try {
         areaProdutos.innerHTML = "<p>Carregando produtos...</p>";
 
-        const resposta = await fetch("http://localhost:3000/api/produtos");
+        const resposta = await fetch("https://camelia-beauty-api.vercel.app/api/produtos");
 
         if (!resposta.ok) {
             throw new Error("Não foi possível buscar os produtos.");
@@ -150,7 +150,7 @@ formulario.addEventListener("submit", async (evento) => {
     }
 
     try {
-        const resposta = await fetch("http://localhost:3000/api/contato", {
+        const resposta = await fetch("https://camelia-beauty-api.vercel.app/api/contato", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -250,7 +250,7 @@ formularioCheckout.addEventListener("submit", async (evento) => {
     const forma_pagamento = document.getElementById("checkout-pagamento").value;
 
     try {
-        const resposta = await fetch("http://localhost:3000/api/pedidos", {
+        const resposta = await fetch("https://camelia-beauty-api.vercel.app/api/pedidos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -348,7 +348,7 @@ function adicionarMensagemCecilia(texto, remetente) {
 
 async function responderCecilia(texto) {
     try {
-        const respostaAPI = await fetch("http://localhost:3000/api/cecilia", {
+        const respostaAPI = await fetch("https://camelia-beauty-api.vercel.app/api/cecilia", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
