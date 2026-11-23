@@ -206,6 +206,92 @@ document.addEventListener("keydown", (evento) => {
     }
 });
 
+// Controle de abertura e fechamento do checkout
+const botaoFinalizar = document.getElementById("finalizar-compra");
+const checkoutOverlay = document.getElementById("checkout-overlay");
+const fecharCheckout = document.getElementById("fechar-checkout");
+
+// Abre o formulário de finalização
+botaoFinalizar.addEventListener("click", () => {
+    if (carrinho.length > 0) {
+        fecharPainelCarrinho();
+        checkoutOverlay.hidden = false;
+    }
+});
+
+// Fecha o formulário pelo botão X
+fecharCheckout.addEventListener("click", () => {
+    checkoutOverlay.hidden = true;
+});
+
+// Fecha ao clicar fora do formulário
+checkoutOverlay.addEventListener("click", (evento) => {
+    if (evento.target === checkoutOverlay) {
+        checkoutOverlay.hidden = true;
+    }
+});
+
+
+// Envio do formulário de checkout
+const formularioCheckout = document.getElementById("form-checkout");
+
+formularioCheckout.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+
+    const nome = document.getElementById("checkout-nome").value.trim();
+    const email = document.getElementById("checkout-email").value.trim();
+    const telefone = document.getElementById("checkout-telefone").value.trim();
+    const cep = document.getElementById("checkout-cep").value.trim();
+    const endereco = document.getElementById("checkout-endereco").value.trim();
+    const numero = document.getElementById("checkout-numero").value.trim();
+    const complemento = document.getElementById("checkout-complemento").value.trim();
+    const cidade = document.getElementById("checkout-cidade").value.trim();
+    const estado = document.getElementById("checkout-estado").value.trim();
+    const forma_pagamento = document.getElementById("checkout-pagamento").value;
+
+    try {
+        const resposta = await fetch("http://localhost:3000/api/pedidos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nome,
+                email,
+                telefone,
+                cep,
+                endereco,
+                numero,
+                complemento,
+                cidade,
+                estado,
+                forma_pagamento,
+                itens: carrinho.map(produto => ({
+                    produto_id: produto.id,
+                    quantidade: produto.quantidade
+                }))
+            })
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(resultado.erro || "Não foi possível registrar o pedido.");
+        }
+
+        alert(`Pedido realizado com sucesso! Número do pedido: ${resultado.pedido.id}`);
+
+        carrinho = [];
+        atualizarCarrinho();
+        formularioCheckout.reset();
+        checkoutOverlay.hidden = true;
+
+    } catch (erro) {
+        console.error("Erro ao finalizar compra:", erro);
+        alert(erro.message || "Não foi possível finalizar a compra.");
+    }
+});
+
 // Controle de abertura e fechamento da Cecília
 const botaoCecilia = document.getElementById("botao-cecilia");
 const janelaCecilia = document.getElementById("janela-cecilia");

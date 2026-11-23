@@ -622,3 +622,104 @@ body {
         height: 450px;
     }
 }
+
+
+/* ==========================================
+   CHECKOUT - FINALIZAÇÃO DA COMPRA
+========================================== */
+
+.checkout-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.checkout-overlay[hidden] {
+    display: none;
+}
+
+.checkout-modal {
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--branco);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+}
+
+.checkout-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.checkout-cabecalho h2 {
+    margin: 8px 0;
+    color: var(--marrom);
+}
+
+#fechar-checkout {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--marrom);
+}
+
+#form-checkout {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#form-checkout h3 {
+    color: var(--marrom);
+    margin: 20px 0 5px;
+}
+
+#form-checkout label {
+    color: var(--marrom);
+    font-size: 14px;
+}
+
+#form-checkout input,
+#form-checkout select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--bege);
+    border-radius: 6px;
+    background: white;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+#form-checkout input:focus,
+#form-checkout select:focus {
+    outline: none;
+    border-color: var(--dourado-escuro);
+}
+
+.checkout-aviso {
+    font-size: 13px;
+    color: var(--marrom);
+    background: var(--bege);
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+@media (max-width: 600px) {
+    .checkout-modal {
+        padding: 22px;
+    }
+}

@@ -68,6 +68,7 @@ Pessoas interessadas em produtos de beleza, maquiagem e cuidados pessoais.
 - Atendimento automatizado com personalidade e regras próprias.
 - Consulta ao catálogo de produtos diretamente no PostgreSQL pela assistente virtual.
 
+
 ## Estrutura do projeto
 
 ```text
@@ -76,13 +77,17 @@ camelia-beauty/
 │   ├── server.js
 │   ├── db.js
 │   ├── package.json
+│   ├── package-lock.json
 │   └── .env.example
 ├── database/
 │   ├── schema.sql
-│   └── dados.sql
+│   ├── dados.sql
+│   ├── atualizacao_clientes.sql
+│   └── DER-Camelia-Beauty.drawio
 ├── index.html
 ├── style.css
 ├── script.js
+├── .gitignore
 └── README.md
 ```
 
@@ -106,19 +111,23 @@ O banco de dados possui cinco tabelas principais:
 - Cada pedido está associado a um cliente.
 - Cada item de pedido está associado a um pedido e a um produto.
 
+
 ### Scripts SQL
 
-Os scripts para criação e preenchimento do banco estão disponíveis na pasta `database/`:
+Os scripts para criação, atualização e preenchimento do banco estão disponíveis na pasta `database/`:
 
-- `schema.sql`: criação das tabelas e do índice.
-- `dados.sql`: inserção das categorias e dos produtos fictícios.
+- `schema.sql`: criação das cinco tabelas e do índice.
+- `dados.sql`: inserção das quatro categorias e dos 25 produtos fictícios.
+- `atualizacao_clientes.sql`: adiciona campos complementares à tabela de clientes, caso ainda não existam.
+
 
 ### Como configurar o banco de dados
 
 1. Crie um banco de dados PostgreSQL.
 2. Configure a variável `DATABASE_URL` no arquivo `backend/.env`.
 3. Execute o conteúdo de `database/schema.sql` para criar as tabelas e o índice.
-4. Execute o conteúdo de `database/dados.sql` para inserir as categorias e os 25 produtos fictícios.
+4. Se necessário, execute o conteúdo de `database/atualizacao_clientes.sql` para adicionar os campos complementares à tabela de clientes.
+5. Execute o conteúdo de `database/dados.sql` para inserir as categorias e os 25 produtos fictícios.
 
 Os scripts SQL permitem reproduzir a estrutura e os dados iniciais do banco em uma nova instalação.
 

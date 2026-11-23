@@ -28,7 +28,14 @@ CREATE TABLE clientes (
     nome VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL,
     mensagem TEXT NOT NULL,
-    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    telefone VARCHAR(20),
+    cep VARCHAR(9),
+    endereco VARCHAR(200),
+    numero VARCHAR(20),
+    complemento VARCHAR(100),
+    cidade VARCHAR(100),
+    estado VARCHAR(2)
 );
 
 -- Tabela de pedidos

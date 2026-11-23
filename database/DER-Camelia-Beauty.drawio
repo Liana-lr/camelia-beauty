@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="Js1XndwIKheIamgMYP82">
+    <mxGraphModel dx="1031" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-7" edge="1" parent="1" source="dWj_yHt9ZjHM8ggu_reF-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="dWj_yHt9ZjHM8ggu_reF-2">
+          <mxGeometry relative="1" x="0.2308" as="geometry">
+            <Array as="points">
+              <mxPoint x="425" y="150" />
+              <mxPoint x="380" y="150" />
+              <mxPoint x="380" y="200" />
+              <mxPoint x="475" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-13" connectable="0" parent="dWj_yHt9ZjHM8ggu_reF-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.9237" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-14" connectable="0" parent="dWj_yHt9ZjHM8ggu_reF-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.1168" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;CATEGORIAS&lt;/div&gt;&lt;div&gt;----------------&lt;/div&gt;&lt;div&gt;PK id&lt;/div&gt;&lt;div&gt;nome&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="300" x="200" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-10" edge="1" parent="1" source="dWj_yHt9ZjHM8ggu_reF-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="dWj_yHt9ZjHM8ggu_reF-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-19" connectable="0" parent="dWj_yHt9ZjHM8ggu_reF-10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7573" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;PRODUTOS&lt;/div&gt;&lt;div&gt;----------------&lt;/div&gt;&lt;div&gt;PK id&lt;/div&gt;&lt;div&gt;nome&lt;/div&gt;&lt;div&gt;descricao&lt;/div&gt;&lt;div&gt;preco&lt;/div&gt;&lt;div&gt;imagem&lt;/div&gt;&lt;div&gt;FK categoria_id&lt;/div&gt;&lt;div&gt;ativo&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="130" x="410" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;CLIENTES&lt;/div&gt;&lt;div&gt;----------------&lt;/div&gt;&lt;div&gt;PK id&lt;/div&gt;&lt;div&gt;nome&lt;/div&gt;&lt;div&gt;email&lt;/div&gt;&lt;div&gt;mensagem&lt;/div&gt;&lt;div&gt;data_envio&lt;/div&gt;&lt;div&gt;telefone&lt;/div&gt;&lt;div&gt;cep&lt;/div&gt;&lt;div&gt;endereco&lt;/div&gt;&lt;div&gt;numero&lt;/div&gt;&lt;div&gt;complemento&lt;/div&gt;&lt;div&gt;cidade&lt;/div&gt;&lt;div&gt;estado&lt;/div&gt;" vertex="1">
+          <mxGeometry height="220" width="130" x="50" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-11" edge="1" parent="1" source="dWj_yHt9ZjHM8ggu_reF-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="dWj_yHt9ZjHM8ggu_reF-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-20" connectable="0" parent="dWj_yHt9ZjHM8ggu_reF-11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8544" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-21" connectable="0" parent="dWj_yHt9ZjHM8ggu_reF-11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.8331" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;PEDIDOS&lt;/div&gt;&lt;div&gt;----------------&lt;/div&gt;&lt;div&gt;PK id&lt;/div&gt;&lt;div&gt;FK cliente_id&lt;/div&gt;&lt;div&gt;total&lt;/div&gt;&lt;div&gt;status&lt;/div&gt;&lt;div&gt;forma_pagamento&lt;/div&gt;&lt;div&gt;data_pedido&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="130" x="250" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;ITENS_PEDIDO&lt;/div&gt;&lt;div&gt;----------------&lt;/div&gt;&lt;div&gt;PK id&lt;/div&gt;&lt;div&gt;FK pedido_id&lt;/div&gt;&lt;div&gt;FK produto_id&lt;/div&gt;&lt;div&gt;quantidade&lt;/div&gt;&lt;div&gt;preco_unitario&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="130" x="510" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-8" edge="1" parent="1" source="dWj_yHt9ZjHM8ggu_reF-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.036;entryY=0.692;entryDx=0;entryDy=0;entryPerimeter=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="dWj_yHt9ZjHM8ggu_reF-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-15" connectable="0" parent="dWj_yHt9ZjHM8ggu_reF-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.6766" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-16" connectable="0" parent="dWj_yHt9ZjHM8ggu_reF-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;labelPadding=0 4;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.5891" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="1" vertex="1">
+          <mxGeometry height="30" width="60" x="520" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="dWj_yHt9ZjHM8ggu_reF-22" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;ul&gt;&lt;li&gt;&lt;p&gt;PK = Chave primária.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;FK = Chave estrangeira.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;1:N = Um para muitos.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="100" width="130" x="30" y="140" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

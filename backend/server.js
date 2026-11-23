@@ -240,11 +240,29 @@ app.post("/api/pedidos", async (req, res) => {
     const conexao = await pool.connect();
 
     try {
-        const { nome, email, itens, forma_pagamento } = req.body;
+        const {
+            nome,
+            email,
+            telefone,
+            cep,
+            endereco,
+            numero,
+            complemento,
+            cidade,
+            estado,
+            itens,
+            forma_pagamento
+        } = req.body;
 
         if (
             !nome?.trim() ||
             !email?.trim() ||
+            !telefone?.trim() ||
+            !cep?.trim() ||
+            !endereco?.trim() ||
+            !numero?.trim() ||
+            !cidade?.trim() ||
+            !estado?.trim() ||
             !Array.isArray(itens) ||
             itens.length === 0 ||
             !["pix", "credito", "debito"].includes(forma_pagamento)
@@ -270,10 +288,22 @@ app.post("/api/pedidos", async (req, res) => {
         await conexao.query("BEGIN");
 
         const cliente = await conexao.query(
-            `INSERT INTO clientes (nome, email, mensagem)
-             VALUES ($1, $2, $3)
-             RETURNING id`,
-            [nome.trim(), email.trim(), "Cliente realizou um pedido."]
+            `INSERT INTO clientes
+            (nome, email, mensagem, telefone, cep, endereco, numero, complemento, cidade, estado)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            RETURNING id`,
+            [
+                nome.trim(),
+                email.trim(),
+                "Cliente realizou um pedido.",
+                telefone.trim(),
+                cep.trim(),
+                endereco.trim(),
+                numero.trim(),
+                complemento?.trim() || null,
+                cidade.trim(),
+                estado.trim().toUpperCase()
+            ]
         );
 
         let total = 0;
